@@ -339,7 +339,7 @@ export default Vue.extend({
 
 .widget-body {
   padding: 20px;
-  min-height: 170px;
+  /* min-height: 170px; */
   position: relative;
 }
 

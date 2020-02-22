@@ -407,4 +407,7 @@ export default Vue.extend({
     padding: 15px;
   }
 }
+.hljs {
+  max-width: 90vw;
+}
 </style>
