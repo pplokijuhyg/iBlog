@@ -1,6 +1,8 @@
 <template>
   <div class="article-edit">
-    <div class="page-header">{{ pageHeader }}</div>
+    <div class="page-header">
+      {{ pageHeader }}
+    </div>
     <div class="page-body">
       <a-form :form="form" :self-update="true">
         <div class="title-line">
@@ -24,12 +26,21 @@
                 v-for="(item, index) in categories"
                 :key="index"
                 :value="item._id"
-              >{{ item.cateName }}</a-select-option>
+              >
+                {{ item.cateName }}
+              </a-select-option>
               <div slot="dropdownRender" slot-scope="menu">
                 <v-nodes :vnodes="menu" />
                 <a-divider style="margin: 4px 0;" />
-                <a href="/admin/category-manage" target="_blank" class="link-category-btn">
-                  <font-awesome-icon :icon="['fas', 'plus']" style="margin-right: 4px;" />新的分类
+                <a
+                  href="/admin/category-manage"
+                  target="_blank"
+                  class="link-category-btn"
+                >
+                  <font-awesome-icon
+                    :icon="['fas', 'plus']"
+                    style="margin-right: 4px;"
+                  />新的分类
                 </a>
               </div>
             </a-select>
@@ -41,8 +52,12 @@
             name="isLocalGroup"
             @change="isLocalChange"
           >
-            <a-radio :value="true">本地</a-radio>
-            <a-radio :value="false">外链</a-radio>
+            <a-radio :value="true">
+              本地
+            </a-radio>
+            <a-radio :value="false">
+              外链
+            </a-radio>
           </a-radio-group>
         </a-form-item>
         <div v-show="!initialData.isLocal">
@@ -59,7 +74,9 @@
           <a-form-item :colon="false">
             <span slot="label">
               Alias
-              <a-tooltip title="文章别名，如：this-is-my-fist-post，将作为URL的一部分">
+              <a-tooltip
+                title="文章别名，如：this-is-my-fist-post，将作为URL的一部分"
+              >
                 <a-icon type="question-circle-o" />
               </a-tooltip>
             </span>
@@ -84,9 +101,14 @@
               </client-only>
               <div class="editor-footer">
                 <a-tooltip>
-                  <template slot="title">打开Markdown语法速查</template>
+                  <template slot="title">
+                    打开Markdown语法速查
+                  </template>
                   <a @click="mcsShow = true">
-                    <font-awesome-icon :icon="['fab', 'markdown']" style="font-size: 14px" />
+                    <font-awesome-icon
+                      :icon="['fab', 'markdown']"
+                      style="font-size: 14px"
+                    />
                     <span>支持Markdown语法</span>
                   </a>
                 </a-tooltip>
@@ -108,66 +130,94 @@
             >
               <a-radio :value="0">
                 默认
-                <a-tooltip title="遵循系统设置 - 开启文章评论">
+                <a-tooltip
+                  title="遵循系统设置 - 开启文章评论"
+                >
                   <a-icon type="question-circle-o" />
                 </a-tooltip>
               </a-radio>
-              <a-radio :value="1">允许评论</a-radio>
-              <a-radio :value="-1">禁止评论</a-radio>
+              <a-radio :value="1">
+                允许评论
+              </a-radio>
+              <a-radio :value="-1">
+                禁止评论
+              </a-radio>
             </a-radio-group>
           </a-form-item>
         </div>
         <div class="btn-wrap">
           <template v-if="!initialData._id">
             <a-button type="primary" @click="publish">
-              <font-awesome-icon :icon="['far', 'paper-plane']" style="margin-right: 4px;" />发布文章
+              <font-awesome-icon
+                :icon="['far', 'paper-plane']"
+                style="margin-right: 4px;"
+              />发布文章
             </a-button>
             <a-button @click="saveDraft">
-              <font-awesome-icon :icon="['far', 'file-alt']" style="margin-right: 4px;" />存为草稿
+              <font-awesome-icon
+                :icon="['far', 'file-alt']"
+                style="margin-right: 4px;"
+              />存为草稿
             </a-button>
           </template>
           <template v-else>
             <template v-if="initialData.isDraft">
               <a-button type="primary" @click="publish2">
-                <font-awesome-icon :icon="['far', 'paper-plane']" style="margin-right: 4px;" />发布文章
+                <font-awesome-icon
+                  :icon="['far', 'paper-plane']"
+                  style="margin-right: 4px;"
+                />发布文章
               </a-button>
               <a-button @click="save()">
-                <font-awesome-icon :icon="['far', 'save']" style="margin-right: 4px;" />保存草稿
+                <font-awesome-icon
+                  :icon="['far', 'save']"
+                  style="margin-right: 4px;"
+                />保存草稿
               </a-button>
             </template>
             <template v-else>
               <a-button type="primary" @click="save()">
-                <font-awesome-icon :icon="['far', 'save']" style="margin-right: 4px;" />保存更改
+                <font-awesome-icon
+                  :icon="['far', 'save']"
+                  style="margin-right: 4px;"
+                />保存更改
               </a-button>
               <a-button @click="unpublish">
-                <font-awesome-icon :icon="['fas', 'history']" style="margin-right: 4px;" />取消发布
+                <font-awesome-icon
+                  :icon="['fas', 'history']"
+                  style="margin-right: 4px;"
+                />取消发布
               </a-button>
             </template>
           </template>
-          <nuxt-link class="ant-btn" to="/admin/article-manage">返回</nuxt-link>
+          <nuxt-link class="ant-btn" to="/admin/article-manage">
+            返回
+          </nuxt-link>
         </div>
       </a-form>
     </div>
     <a-modal v-model="mcsShow" title="Markdown 语法速查" width="640px">
       <md-cheat-sheet />
       <div slot="footer">
-        <a-button type="primary" @click="mcsShow = false">关闭</a-button>
+        <a-button type="primary" @click="mcsShow = false">
+          关闭
+        </a-button>
       </div>
     </a-modal>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import MdCheatSheet from "@/components/MdCheatSheet.vue";
-import { IResp } from "@/types";
-import { IPost } from "@/types/schema";
-import { otherCategoryItem } from "@/server/models/category";
-import "highlight.js/styles/tomorrow.css";
-import "@/static/article.less";
+import Vue from 'vue';
+import MdCheatSheet from '@/components/MdCheatSheet.vue';
+import { IResp } from '@/types';
+import { IPost } from '@/types/schema';
+import { otherCategoryItem } from '@/server/models/category';
+import 'highlight.js/styles/tomorrow.css';
+import '@/static/article.less';
 export default Vue.extend({
-  name: "PageAdminArticle",
-  layout: "admin",
+  name: 'PageAdminArticle',
+  layout: 'admin',
   components: {
     VNodes: {
       functional: true,
@@ -175,10 +225,10 @@ export default Vue.extend({
     },
     MdCheatSheet
   },
-  async asyncData({ $axios, query, error }: any) {
+  async asyncData ({ $axios, query, error }: any) {
     const uid = query.uid;
     if (uid) {
-      const { code, data } = await $axios.$get("/api/admin/article", {
+      const { code, data } = await $axios.$get('/api/admin/article', {
         params: {
           uid
         }
@@ -191,12 +241,12 @@ export default Vue.extend({
         }
         error({
           statusCode: 404,
-          message: "未找到该页面"
+          message: '未找到该页面'
         });
       } else {
         error({
           statusCode: 500,
-          message: "内部服务器错误"
+          message: '内部服务器错误'
         });
       }
     } else {
@@ -208,21 +258,21 @@ export default Vue.extend({
       };
     }
   },
-  data() {
+  data () {
     return {
       settings: this.$store.state.settings,
       initialData: {
         isLocal: true,
         commentsFlag: 0
       } as IPost,
-      content: "",
+      content: '',
       mcsShow: false,
       categories: [],
       titleOpts: {
         rules: [
           {
             required: true,
-            message: "标题不能为空！"
+            message: '标题不能为空！'
           }
         ]
       },
@@ -243,18 +293,18 @@ export default Vue.extend({
     };
   },
   computed: {
-    pageHeader(): string {
-      return this.initialData._id ? "编辑文章" : "新增文章";
+    pageHeader (): string {
+      return this.initialData._id ? '编辑文章' : '新增文章';
     },
-    form(): any {
+    form (): any {
       return this.$form.createForm(this);
     },
-    aliasOpts(): object {
+    aliasOpts (): object {
       return {
         rules: [
           {
             required: this.initialData.isLocal,
-            message: "Alias不能为空！"
+            message: 'Alias不能为空！'
           },
           {
             validator: this.checkAlias
@@ -262,85 +312,81 @@ export default Vue.extend({
         ]
       };
     },
-    urlOpts(): object {
+    urlOpts (): object {
       return {
         rules: [
           {
             required: !this.initialData.isLocal,
-            message: "链接地址不能为空！"
+            message: '链接地址不能为空！'
           },
           {
-            type: "url",
-            message: "链接地址格式不正确！"
+            type: 'url',
+            message: '链接地址格式不正确！'
           }
         ]
       };
     },
-    editorOptions(): object {
+    editorOptions (): object {
       if (process.server) {
         return {};
       }
-      const $ = require("jquery");
+      const $ = require('jquery');
       return {
         hideModeSwitch: true,
-        language: "zh_CN",
+        language: 'zh_CN',
         usageStatistics: false,
-        placeholder: "请输入文章正文",
+        placeholder: '请输入文章正文',
         toolbarItems: [
-          "heading",
-          "bold",
-          "italic",
-          "strike",
-          "divider",
-          "hr",
-          "quote",
-          "divider",
-          "ul",
-          "ol",
-          "task",
-          "divider",
-          "image",
-          "table",
-          "link",
-          "divider",
-          "code",
-          "codeblock",
+          'heading',
+          'bold',
+          'italic',
+          'strike',
+          'divider',
+          'hr',
+          'quote',
+          'divider',
+          'ul',
+          'ol',
+          'task',
+          'divider',
+          'image',
+          'table',
+          'link',
+          'divider',
+          'code',
+          'codeblock',
           {
-            type: "button",
+            type: 'button',
             options: {
-              $el: $(
-                '<div class="custom-button"><svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="info-circle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="svg-inline--fa fa-info-circle"><path fill="currentColor" d="M256 40c118.621 0 216 96.075 216 216 0 119.291-96.61 216-216 216-119.244 0-216-96.562-216-216 0-119.203 96.602-216 216-216m0-32C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm-36 344h12V232h-12c-6.627 0-12-5.373-12-12v-8c0-6.627 5.373-12 12-12h48c6.627 0 12 5.373 12 12v140h12c6.627 0 12 5.373 12 12v8c0 6.627-5.373 12-12 12h-72c-6.627 0-12-5.373-12-12v-8c0-6.627 5.373-12 12-12zm36-240c-17.673 0-32 14.327-32 32s14.327 32 32 32 32-14.327 32-32-14.327-32-32-32z" class=""></path></svg></div>'
-              ),
-              name: "info",
-              className: "",
-              event: "evtInfo",
-              tooltip: "插入信息块"
+              $el: $('<div class="custom-button"><svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="info-circle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="svg-inline--fa fa-info-circle"><path fill="currentColor" d="M256 40c118.621 0 216 96.075 216 216 0 119.291-96.61 216-216 216-119.244 0-216-96.562-216-216 0-119.203 96.602-216 216-216m0-32C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm-36 344h12V232h-12c-6.627 0-12-5.373-12-12v-8c0-6.627 5.373-12 12-12h48c6.627 0 12 5.373 12 12v140h12c6.627 0 12 5.373 12 12v8c0 6.627-5.373 12-12 12h-72c-6.627 0-12-5.373-12-12v-8c0-6.627 5.373-12 12-12zm36-240c-17.673 0-32 14.327-32 32s14.327 32 32 32 32-14.327 32-32-14.327-32-32-32z" class=""></path></svg></div>'),
+              name: 'info',
+              className: '',
+              event: 'evtInfo',
+              tooltip: '插入信息块'
             }
           },
           {
-            type: "button",
+            type: 'button',
             options: {
-              $el: $(
-                '<div class="custom-button"><svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="exclamation-triangle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="svg-inline--fa fa-exclamation-triangle"><path fill="currentColor" d="M270.2 160h35.5c3.4 0 6.1 2.8 6 6.2l-7.5 196c-.1 3.2-2.8 5.8-6 5.8h-20.5c-3.2 0-5.9-2.5-6-5.8l-7.5-196c-.1-3.4 2.6-6.2 6-6.2zM288 388c-15.5 0-28 12.5-28 28s12.5 28 28 28 28-12.5 28-28-12.5-28-28-28zm281.5 52L329.6 24c-18.4-32-64.7-32-83.2 0L6.5 440c-18.4 31.9 4.6 72 41.6 72H528c36.8 0 60-40 41.5-72zM528 480H48c-12.3 0-20-13.3-13.9-24l240-416c6.1-10.6 21.6-10.7 27.7 0l240 416c6.2 10.6-1.5 24-13.8 24z" class=""></path></svg></div>'
-              ),
-              name: "alert",
-              className: "",
-              event: "evtAlert",
-              tooltip: "插入提示块"
+              $el: $('<div class="custom-button"><svg aria-hidden="true" focusable="false" data-prefix="fal" data-icon="exclamation-triangle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="svg-inline--fa fa-exclamation-triangle"><path fill="currentColor" d="M270.2 160h35.5c3.4 0 6.1 2.8 6 6.2l-7.5 196c-.1 3.2-2.8 5.8-6 5.8h-20.5c-3.2 0-5.9-2.5-6-5.8l-7.5-196c-.1-3.4 2.6-6.2 6-6.2zM288 388c-15.5 0-28 12.5-28 28s12.5 28 28 28 28-12.5 28-28-12.5-28-28-28zm281.5 52L329.6 24c-18.4-32-64.7-32-83.2 0L6.5 440c-18.4 31.9 4.6 72 41.6 72H528c36.8 0 60-40 41.5-72zM528 480H48c-12.3 0-20-13.3-13.9-24l240-416c6.1-10.6 21.6-10.7 27.7 0l240 416c6.2 10.6-1.5 24-13.8 24z" class=""></path></svg></div>'),
+              name: 'alert',
+              className: '',
+              event: 'evtAlert',
+              tooltip: '插入提示块'
             }
           }
         ],
-        exts: ["codeblock", "scrollSync"],
+        exts: ['codeblock', 'scrollSync'],
         hooks: {
           addImageBlobHook: (this as any).onAddImageBlob
         }
       };
     }
   },
-  created() {
+  created () {
     this.getCategories();
   },
-  mounted() {
+  mounted () {
     if (this.initialData._id) {
       // 编辑模式
       this.form.setFieldsValue({
@@ -348,7 +394,7 @@ export default Vue.extend({
         alias: this.initialData.alias,
         category: this.initialData.category,
         isLocal: this.initialData.isLocal,
-        url: this.initialData.url || "",
+        url: this.initialData.url || '',
         labels: this.initialData.labels,
         commentsFlag: this.initialData.commentsFlag
       });
@@ -356,63 +402,67 @@ export default Vue.extend({
     }
     this.$refs.titleInput.focus();
     this.autosave = setInterval(() => {
-      this.save("自动保存");
+      this.save('自动保存');
     }, 15 * 1000);
   },
   methods: {
-    async getCategories() {
+    async getCategories () {
       const { code, data }: IResp = await this.$axios.$get(
-        "/api/admin/categories"
+        '/api/admin/categories'
       );
       if (code === 1) {
         this.categories = data;
       }
     },
-    async refreshCategories() {
+    async refreshCategories () {
       this.categoryLoading = true;
       await this.getCategories();
       this.categoryLoading = false;
     },
-    onEditorLoad() {
+    onEditorLoad () {
       setTimeout(() => {
         const editor = this.$refs.editor.editor;
-        editor.eventManager.addEventType("evtInfo");
-        editor.eventManager.listen("evtInfo", () => {
-          this.editorEvent(editor, "info");
+        editor.eventManager.addEventType('evtInfo');
+        editor.eventManager.listen('evtInfo', () => {
+          this.editorEvent(editor, 'info');
         });
-        editor.eventManager.addEventType("evtAlert");
-        editor.eventManager.listen("evtAlert", () => {
-          this.editorEvent(editor, "alert");
+        editor.eventManager.addEventType('evtAlert');
+        editor.eventManager.listen('evtAlert', () => {
+          this.editorEvent(editor, 'alert');
         });
       }, 0);
     },
-    editorEvent(editor, type: string) {
+    editorEvent (editor, type: string) {
       const cm = editor.getCodeMirror();
       const doc = cm.getDoc();
       const range = {
-        from: cm.getCursor("from"),
-        to: cm.getCursor("to")
+        from: cm.getCursor('from'),
+        to: cm.getCursor('to')
       };
-      const replaceText = ["```" + type, doc.getSelection(), "```"];
+      const replaceText = [
+        '```' + type,
+        doc.getSelection(),
+        '```'
+      ];
       let cursorOffset = 1;
       if (range.from.ch !== 0) {
-        replaceText.unshift("");
+        replaceText.unshift('');
         cursorOffset += 1;
       }
       if (range.to.ch !== doc.getLine(range.to.line).length) {
-        replaceText.push("");
+        replaceText.push('');
       }
-      doc.replaceSelection(replaceText.join("\n"));
+      doc.replaceSelection(replaceText.join('\n'));
       cm.setCursor(range.from.line + cursorOffset, 0);
       cm.focus();
     },
-    onAddImageBlob(blob, callback) {
+    onAddImageBlob (blob, callback) {
       if (process.client && blob) {
         const formData = new FormData();
-        formData.append("file", blob);
-        this.$axios.$post("/api/uploadImage", formData).then(resp => {
+        formData.append('file', blob);
+        this.$axios.$post('/api/uploadImage', formData).then(resp => {
           if (resp.code === 1) {
-            callback(resp.data.url, "");
+            callback(resp.data.url, '');
           } else {
             console.error(resp.message);
             this.$message.error(resp.message);
@@ -420,10 +470,10 @@ export default Vue.extend({
         });
       }
     },
-    checkAlias(_rule, value, callback) {
+    checkAlias (_rule, value, callback) {
       if (value) {
         this.$axios
-          .$get("/api/admin/checkArticleAlias", {
+          .$get('/api/admin/checkArticleAlias', {
             params: {
               alias: value,
               excludeUid: this.initialData._id
@@ -434,14 +484,14 @@ export default Vue.extend({
               callback();
             } else {
               // eslint-disable-next-line standard/no-callback-literal
-              callback("alias已存在！");
+              callback('alias已存在！');
             }
           });
       } else {
         callback();
       }
     },
-    isLocalChange(e) {
+    isLocalChange (e) {
       this.initialData.isLocal = e.target.value;
 
       // 切换本地外链后，光标聚焦
@@ -453,7 +503,7 @@ export default Vue.extend({
         }
       });
     },
-    publish() {
+    publish () {
       this.form.validateFieldsAndScroll((error, values) => {
         if (!error) {
           const self = this;
@@ -462,25 +512,25 @@ export default Vue.extend({
             ...values
           };
           this.$confirm({
-            title: "确定要发布吗？",
-            okText: "确定",
-            cancelText: "取消",
-            onOk() {
+            title: '确定要发布吗？',
+            okText: '确定',
+            cancelText: '取消',
+            onOk () {
               return new Promise((resolve, reject) => {
-                self.$axios.$post("/api/admin/article", data).then(resp => {
+                self.$axios.$post('/api/admin/article', data).then(resp => {
                   if (resp.code === 1) {
                     self.initialData = resp.data.article;
                     history.replaceState(
                       null,
-                      "",
-                      `${location.protocol}//${location.host}${location.pathname}?uid=${self.initialData._id}`
+                      '',
+                                            `${location.protocol}//${location.host}${location.pathname}?uid=${self.initialData._id}`
                     );
                     resolve();
-                    self.$message.success("文章发布成功！");
+                    self.$message.success('文章发布成功！');
                   } else {
                     console.error(resp.message);
                     reject(resp.message);
-                    self.$message.error("操作失败！");
+                    self.$message.error('操作失败！');
                   }
                 });
               });
@@ -489,7 +539,7 @@ export default Vue.extend({
         }
       });
     },
-    publish2() {
+    publish2 () {
       this.form.validateFieldsAndScroll((error, values) => {
         if (!error) {
           const self = this;
@@ -499,27 +549,27 @@ export default Vue.extend({
             ...values
           };
           this.$confirm({
-            title: "确定要发布吗？",
-            okText: "确定",
-            cancelText: "取消",
-            onOk() {
+            title: '确定要发布吗？',
+            okText: '确定',
+            cancelText: '取消',
+            onOk () {
               return new Promise((resolve, reject) => {
                 self.$axios
-                  .$put("/api/admin/article", data, {
+                  .$put('/api/admin/article', data, {
                     params: {
                       uid: self.initialData._id,
-                      pubtype: "publish"
+                      pubtype: 'publish'
                     }
                   })
                   .then(resp => {
                     if (resp.code === 1) {
                       self.initialData = resp.data.article;
                       resolve();
-                      self.$message.success("文章发布成功！");
+                      self.$message.success('文章发布成功！');
                     } else {
                       console.error(resp.message);
                       reject(resp.message);
-                      self.$message.error("操作失败！");
+                      self.$message.error('操作失败！');
                     }
                   });
               });
@@ -528,7 +578,7 @@ export default Vue.extend({
         }
       });
     },
-    saveDraft() {
+    saveDraft () {
       this.form.validateFieldsAndScroll((error, values) => {
         if (!error) {
           const self = this;
@@ -537,42 +587,42 @@ export default Vue.extend({
             isDraft: true,
             ...values
           };
-          this.$axios.$post("/api/admin/article", data).then(resp => {
+          this.$axios.$post('/api/admin/article', data).then(resp => {
             if (resp.code === 1) {
               self.initialData = resp.data.article;
               history.replaceState(
                 null,
-                "",
-                `${location.protocol}//${location.host}${location.pathname}?uid=${self.initialData._id}`
+                '',
+                                `${location.protocol}//${location.host}${location.pathname}?uid=${self.initialData._id}`
               );
-              self.$message.success("新建草稿成功！");
+              self.$message.success('新建草稿成功！');
             } else {
               console.error(resp.message);
-              self.$message.error("操作失败！");
+              self.$message.error('操作失败！');
             }
           });
         }
       });
     },
-    unpublish() {
+    unpublish () {
       const self = this;
       this.$confirm({
-        title: "确定要取消发布吗？",
-        content: "文章将变成草稿状态，只有你自己可见。",
-        okText: "确定",
-        cancelText: "取消",
-        onOk() {
+        title: '确定要取消发布吗？',
+        content: '文章将变成草稿状态，只有你自己可见。',
+        okText: '确定',
+        cancelText: '取消',
+        onOk () {
           return new Promise((resolve, reject) => {
             self.$axios
               .$put(
-                "/api/admin/article",
+                '/api/admin/article',
                 {
                   isDraft: true
                 },
                 {
                   params: {
                     uid: self.initialData._id,
-                    pubtype: "unpublish"
+                    pubtype: 'unpublish'
                   }
                 }
               )
@@ -580,18 +630,18 @@ export default Vue.extend({
                 if (resp.code === 1) {
                   self.initialData = resp.data.article;
                   resolve();
-                  self.$message.success("取消发布成功！");
+                  self.$message.success('取消发布成功！');
                 } else {
                   console.error(resp.message);
                   reject(resp.message);
-                  self.$message.error("操作失败！");
+                  self.$message.error('操作失败！');
                 }
               });
           });
         }
       });
     },
-    save(msg = "保存成功！") {
+    save (msg = '保存成功！') {
       this.form.validateFieldsAndScroll((error, values) => {
         if (!error) {
           const self = this;
@@ -600,7 +650,7 @@ export default Vue.extend({
             ...values
           };
           this.$axios
-            .$put("/api/admin/article", data, {
+            .$put('/api/admin/article', data, {
               params: {
                 uid: this.initialData._id
               }
@@ -610,18 +660,16 @@ export default Vue.extend({
                 self.$message.success(msg);
               } else {
                 console.error(resp.message);
-                self.$message.error("操作失败！");
+                self.$message.error('操作失败！');
               }
             });
         }
       });
     }
   },
-  beforeRouteLeave(to, from, next) {
+  beforeRouteLeave (to, from, next) {
     clearInterval(this.autosave);
     next();
-    // 导航离开该组件的对应路由时调用
-    // 可以访问组件实例 `this`
   }
 });
 </script>
@@ -682,21 +730,21 @@ export default Vue.extend({
 }
 
 .article-edit .custom-button {
-  float: left;
-  box-sizing: border-box;
-  outline: none;
-  cursor: pointer;
-  color: #333;
-  background-color: #fff;
-  width: 22px;
-  height: 22px;
-  border-radius: 0;
-  margin: 5px 3px;
-  border: 1px solid #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  -webkit-appearance: none;
+    float: left;
+    box-sizing: border-box;
+    outline: none;
+    cursor: pointer;
+    color: #333;
+    background-color: #fff;
+    width: 22px;
+    height: 22px;
+    border-radius: 0;
+    margin: 5px 3px;
+    border: 1px solid #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-appearance: none;
 }
 
 .article-edit .custom-button:hover {
