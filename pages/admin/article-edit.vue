@@ -168,7 +168,7 @@
                   style="margin-right: 4px;"
                 />发布文章
               </a-button>
-              <a-button @click="save">
+              <a-button @click="save()">
                 <font-awesome-icon
                   :icon="['far', 'save']"
                   style="margin-right: 4px;"
@@ -176,7 +176,7 @@
               </a-button>
             </template>
             <template v-else>
-              <a-button type="primary" @click="save">
+              <a-button type="primary" @click="save()">
                 <font-awesome-icon
                   :icon="['far', 'save']"
                   style="margin-right: 4px;"
@@ -288,7 +288,8 @@ export default Vue.extend({
       commentsFlagOpts: {
         initialValue: 0
       },
-      categoryLoading: false
+      categoryLoading: false,
+      autosave: {} as NodeJS.Timeout
     };
   },
   computed: {
@@ -400,6 +401,10 @@ export default Vue.extend({
       this.content = this.initialData.content;
     }
     this.$refs.titleInput.focus();
+    this.autosave = setInterval(()=>{
+      this.save('自动保存');
+      // console.log("自动保存")
+    },15 * 1000)
   },
   methods: {
     async getCategories () {
@@ -637,7 +642,7 @@ export default Vue.extend({
         }
       });
     },
-    save () {
+    save (msg = '保存成功！') {
       this.form.validateFieldsAndScroll((error, values) => {
         if (!error) {
           const self = this;
@@ -653,7 +658,7 @@ export default Vue.extend({
             })
             .then(resp => {
               if (resp.code === 1) {
-                self.$message.success('保存成功！');
+                self.$message.success(msg);
               } else {
                 console.error(resp.message);
                 self.$message.error('操作失败！');
@@ -662,6 +667,13 @@ export default Vue.extend({
         }
       });
     }
+  },
+  beforeRouteLeave (to, from, next) {
+    console.log("离开")
+    clearInterval(this.autosave)
+    next()
+    // 导航离开该组件的对应路由时调用
+    // 可以访问组件实例 `this`
   }
 });
 </script>
