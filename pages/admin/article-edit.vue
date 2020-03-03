@@ -667,7 +667,7 @@ export default Vue.extend({
       });
     }
   },
-  beforeRouteLeave (to, from, next) {
+  beforeRouteLeave (topath, frompath, next) {
     clearInterval(this.autosave);
     next();
   }
