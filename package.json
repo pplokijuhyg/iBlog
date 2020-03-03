@@ -11,14 +11,6 @@
     "build": "nuxt-ts build",
     "start": "nuxt-ts start"
   },
-  "rules": {
-    "generator-star-spacing": "off",
-    "no-tabs":"off",
-    "no-unused-vars":"off",
-    "no-console":"off",
-    "no-irregular-whitespace":"off",
-    "no-debugger": "off"
-  },
   "dependencies": {
     "@dicebear/avatars": "^4.0.2",
     "@dicebear/avatars-jdenticon-sprites": "^4.0.2",
