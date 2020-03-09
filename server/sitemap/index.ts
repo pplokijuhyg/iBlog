@@ -3,7 +3,6 @@ import { getSettings, getPopArticles } from '../proxy/index';
 import fs from "fs"
 import blogConfig from '../../blog.config';
 async function getsitemap(hostname: any) {
-  console.log(hostname, "name")
   try {
     const sitemap = new SitemapStream({ hostname });
     let { articles } = await getPopArticles(50000);
