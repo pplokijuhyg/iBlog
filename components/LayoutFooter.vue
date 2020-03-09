@@ -17,9 +17,9 @@
     </span>
     <span class="admin-link">
       |
-      <nuxt-link to="/sitemap.xml">
+      <a href="/sitemap.xml" target="_blank">
         sitemap.xml
-      </nuxt-link>
+      </a>
     </span>
   </div>
 </template>
