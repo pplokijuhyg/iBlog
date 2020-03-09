@@ -25,7 +25,7 @@ async function getsitemap(hostname: any) {
     return;
   }
 }
- let sitemap = () => {
+export function sitemap() {
   getSettings().then((settings: any) => {
     if (settings.settings.blogHost == '' || settings.settings.blogHost == undefined) {
       console.log("没有配置站点域名，无法生成sitemap")
@@ -33,8 +33,5 @@ async function getsitemap(hostname: any) {
       getsitemap(settings.settings.blogHost)
     }
   })
-}
-export default {
-  sitemap
 }
 
