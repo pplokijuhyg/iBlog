@@ -4,7 +4,7 @@ import fs from "fs"
 import blogConfig from '../../blog.config';
 async function getsitemap(hostname: any) {
   try {
-    const sitemap = new SitemapStream({ hostname });
+    const sitemap = new SitemapStream({ hostname, lastmodDateOnly: true });
     let { articles } = await getPopArticles(50000);
     sitemap.write({ url: '/', changefreq: 'monthly', priority: 1 })
     for (let i in articles) {
