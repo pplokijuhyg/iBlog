@@ -22,6 +22,10 @@ export interface IBlogConfig {
    * JWT秘钥
    */
     jwtSecret: string;
+    /**
+     * 项目目录
+     */
+    rootPath: string;
 }
 
 export interface IResp {

@@ -91,3 +91,6 @@ sw.*
 
 # Upload Files
 static/upload/images/*
+
+# sitemap
+static/sitemap.xml

@@ -4,7 +4,7 @@ import DB from '../db';
 import { otherCategoryItem } from '../models/category';
 import { IPost, IProfile } from '../../types/schema';
 const { Category, Post, Comment, Guestbook, Setting, Profile } = DB.Models;
-
+import { sitemap } from "../sitemap/index"
 export async function getCategories () {
   const categories = await Category.find(
     {},
@@ -206,6 +206,10 @@ export async function editArticle (query, params: IPost) {
   const article = await Post.findByIdAndUpdate(query.uid, params, {
     new: true
   }).exec();
+  //生成sitemap
+  if(query.pubtype === 'publish' || query.pubtype === 'unpublish'){
+    sitemap()
+  }
   return {
     article
   };

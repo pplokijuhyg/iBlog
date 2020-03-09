@@ -5,7 +5,8 @@ const config: IBlogConfig = {
   port: 9000,
   enableHTTPS: false,
   mongoUrl: 'mongodb://localhost:27017/iBlog_v2',
-  jwtSecret: 'myblogjsonwebtokensecretkey'
+  jwtSecret: 'myblogjsonwebtokensecretkey',
+  rootPath: __dirname
 };
 
 export default config;

@@ -254,7 +254,12 @@ export interface ISetting extends Document {
     /**
    * 百度统计Key
    */
-    statisticsKey: string
+    statisticsKey: string,
+
+    /**
+     * sitemap 主机地址
+     */
+    blogHost: string
 }
 
 export interface IProfile extends Document {

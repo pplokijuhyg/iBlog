@@ -14,7 +14,8 @@ export const defaultSetting = {
   enableComments: true,
   commentPageSize: 20,
   enableStatistics: false,
-  statisticsKey: ''
+  statisticsKey: '',
+  blogHost: ''
 } as ISetting;
 
 export class Setting {
@@ -34,7 +35,8 @@ export class Setting {
         enableComments: { type: Boolean },
         commentPageSize: { type: Number },
         enableStatistics: { type: Boolean },
-        statisticsKey: { type: String }
+        statisticsKey: { type: String },
+        blogHost: { tyep: String }
       });
 
       // 初始化默认系统设置

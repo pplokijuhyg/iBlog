@@ -134,6 +134,15 @@
           </span>
           <a-input v-decorator="['statisticsKey']" placeholder="请输入百度统计Key" allow-clear />
         </a-form-item>
+        <a-form-item :colon="false">
+          <span slot="label">
+            sitemap网站域名
+            <a-tooltip title="设置后会自动生成sitemap.xml，便于搜索引擎抓取" placement="topLeft" arrow-point-at-center>
+              <a-icon type="question-circle-o" />
+            </a-tooltip>
+          </span>
+          <a-input v-decorator="['blogHost']" placeholder="请输入网站域名，含有http://或https://。例如:https://www.baodu.com" allow-clear />
+        </a-form-item>
       </a-form>
       <div class="btn-wrap">
         <a-button type="primary" @click="save">
@@ -208,7 +217,8 @@ export default Vue.extend({
         enableComments: settings.enableComments,
         commentPageSize: settings.commentPageSize,
         enableStatistics: settings.enableStatistics,
-        statisticsKey: settings.statisticsKey
+        statisticsKey: settings.statisticsKey,
+        blogHost: settings.blogHost
       });
     },
     beforeUpload (file) {

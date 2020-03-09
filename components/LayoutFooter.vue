@@ -15,6 +15,12 @@
         后台管理
       </nuxt-link>
     </span>
+    <span class="admin-link">
+      |
+      <nuxt-link to="/sitemap.xml">
+        sitemap.xml
+      </nuxt-link>
+    </span>
   </div>
 </template>
 
