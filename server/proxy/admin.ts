@@ -207,7 +207,7 @@ export async function editArticle (query, params: IPost) {
     new: true
   }).exec();
   //生成sitemap
-  if(query.pubtype === 'publish' || query.pubtype === 'unpublish'){
+  if(query.pubtype !== 'autosave'){
     sitemap()
   }
   return {

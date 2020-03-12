@@ -652,7 +652,8 @@ export default Vue.extend({
           this.$axios
             .$put('/api/admin/article', data, {
               params: {
-                uid: this.initialData._id
+                uid: this.initialData._id,
+                pubtype: msg === '自动保存' ? 'autosave' : ''
               }
             })
             .then(resp => {
