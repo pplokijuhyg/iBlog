@@ -142,6 +142,7 @@ export default Vue.extend({
 .navbar .navbar-brand img {
   height: 46px;
   margin-right: 5px;
+  border-radius: 50%;
 }
 
 .navbar .navbar-brand h4 {
