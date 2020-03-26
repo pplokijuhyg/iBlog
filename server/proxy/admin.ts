@@ -175,6 +175,7 @@ export async function getArticle (uid) {
 
 export async function newArticle (params) {
   const now = new Date();
+  params.alias = params.alias.trim()
   const doc: IPost = {
     createTime: now,
     modifyTime: now,
@@ -185,6 +186,8 @@ export async function newArticle (params) {
   }
   const entity = new Post(doc);
   const newArticle = await entity.save();
+  //生成sermap
+  sitemap()
   return {
     article: newArticle
   };
@@ -193,7 +196,7 @@ export async function newArticle (params) {
 export async function editArticle (query, params: IPost) {
   const now = new Date();
   params.modifyTime = now;
-
+  params.alias = params.alias.trim()
   // 草稿状态->已发布，要修改publishTime字段
   if (query.pubtype === 'publish') {
     params.publishTime = now;
