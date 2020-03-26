@@ -175,7 +175,9 @@ export async function getArticle (uid) {
 
 export async function newArticle (params) {
   const now = new Date();
-  params.alias = params.alias.trim()
+
+  //删除alias收尾空格，确保尾部不会出现空格(会造成链接点击进入与右侧导航出现404)
+  params.alias = params.alias.trim();
   const doc: IPost = {
     createTime: now,
     modifyTime: now,
@@ -196,7 +198,12 @@ export async function newArticle (params) {
 export async function editArticle (query, params: IPost) {
   const now = new Date();
   params.modifyTime = now;
-  params.alias = params.alias.trim()
+  
+  //删除alias收尾空格，确保尾部不会出现空格(会造成链接点击进入与右侧导航出现404)
+  if(params.alias){
+    params.alias = params.alias.trim();
+  }
+
   // 草稿状态->已发布，要修改publishTime字段
   if (query.pubtype === 'publish') {
     params.publishTime = now;
