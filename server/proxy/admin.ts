@@ -233,6 +233,7 @@ export async function deleteArticle (uids: Array<string> | string) {
     { _id: { $in: uids } },
     { isActive: false, publishTime: null }
   ).exec();
+  sitemap();
   return {
     result
   };

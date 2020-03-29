@@ -12,7 +12,7 @@ async function getsitemap(hostname: any) {
     }
     sitemap.end()
     streamToPromise(sitemap).then(sm => {
-      console.log(sm.toString())
+      // console.log(sm.toString())
       fs.writeFile(blogConfig.rootPath + "/static/sitemap.xml", sm.toString(), function (err) {
         if (err) {
           console.error(err);
