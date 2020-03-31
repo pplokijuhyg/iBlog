@@ -367,8 +367,8 @@ export default Vue.extend({
 
 .license-wrap > p {
   margin-bottom: 5px;
+  word-break: break-all;
 }
-
 .end-wrap {
   position: relative;
   border-top: 1px solid #ddd;
@@ -409,5 +409,8 @@ export default Vue.extend({
 }
 .article-main >>> .hljs {
   max-width: 90vw;
+}
+code{
+   word-break: break-all;
 }
 </style>
