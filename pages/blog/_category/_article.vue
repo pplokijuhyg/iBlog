@@ -295,6 +295,10 @@ export default Vue.extend({
   min-height: 60vh;
 }
 
+.article-content >>> code{
+   word-break: break-all;
+}
+
 .side-wrap {
   width: 260px;
   flex: none;
@@ -409,8 +413,5 @@ export default Vue.extend({
 }
 .article-main >>> .hljs {
   max-width: 90vw;
-}
-code{
-   word-break: break-all;
 }
 </style>
