@@ -103,12 +103,19 @@ export default Vue.extend({
   },
   methods: {
     displayUrl (link) {
-      const url = new URL(link);
+      const url = this.parseUrl(link);
       return url.hostname;
     },
     redirectUrl (link) {
-      const url = new URL(link);
+      const url = this.parseUrl(link);
       return url.origin;
+    },
+    parseUrl (link) {
+      if (process.client) {
+        return new URL(link);
+      }
+      const url = require('url');
+      return new url.URL(link);
     }
   }
 });
