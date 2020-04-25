@@ -78,7 +78,7 @@
             </div>
             <template v-else>
               <template v-if="posts.length">
-                <a-button
+                <!-- <a-button
                   v-if="hasNext"
                   class="btn-load"
                   size="large"
@@ -86,8 +86,8 @@
                   @click="loadNext"
                 >
                   下一页
-                </a-button>
-                <div v-else class="no-more">
+                </a-button> -->
+                <div class="no-more">
                   没有更多数据
                 </div>
               </template>
@@ -242,7 +242,16 @@ export default Vue.extend({
       ];
     }
   },
+  mounted(){
+    window.addEventListener('scroll',this.handleScroll,true)
+  },
   methods: {
+    handleScroll(e){
+      let scrollTop = e.target.documentElement.scrollTop || e.target.body.scrollTop;
+      if(this.hasNext && document.body.scrollHeight - document.body.clientHeight - scrollTop < 150){
+        this.loadNext()
+      }
+    },
     disabledDate (date) {
       return date && date > moment().endOf('day');
     },
