@@ -412,7 +412,11 @@ export default Vue.extend({
     padding: 15px;
   }
 }
-.article-main >>> .hljs {
+.article-main{
   max-width: 90vw;
+
 }
+/* .article-main >>> .hljs {
+  max-width: 90vw;
+} */
 </style>
