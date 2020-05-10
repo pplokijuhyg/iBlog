@@ -1,5 +1,5 @@
 # iBlog
-基于 Node.js 的开源个人博客系统，现代化的 UI 和用户体验。采用响应式布局，支持移动端访问。  
+基于 Node.js 的开源个人博客系统，现代化的 UI 和用户体验。同时支持 PC 和移动端访问，支持深色模式。  
 **不仅仅是博客，更是 Demo**，是适合新人入门学习的完整项目。
 
 ## 界面预览
@@ -30,17 +30,17 @@
 
 ## 快速开始
 
-1. 准备条件
+### 准备条件
 
 安装 [Node.js](https://nodejs.org/en/download/) (v8 以上版本)、[MongoDB](https://www.mongodb.org/downloads/)。  
 推荐安装 [Yarn](https://yarnpkg.com/) 而非 npm 以进行包管理。
 
-2. 安装依赖
+### 安装依赖
 ```Shell
 $ yarn
 ```
 
-3. 启动站点
+### 启动站点
 
 * 开发模式
 
@@ -61,6 +61,17 @@ $ yarn start
 ```
 
 打开浏览器，访问 [http://localhost:9000/](http://localhost:9000)
+
+### Debug
+* 要启动前端代码调试，请直接在 Chrome Dev Tools - Sources 面板中进行。
+
+* 要启动服务端代码调试，请以如下命令启动服务，然后点击 Chrome  Dev Tools 左上角的 Node.js 按钮，就可以像调试前端代码一样调试服务端了。
+
+```shell
+$ node --inspect node_modules/.bin/nuxt-ts
+```
+
+
 #### Enjoy it! :smile:
 
 ## 系统设置

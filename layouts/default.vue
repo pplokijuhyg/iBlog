@@ -1,6 +1,8 @@
 <template>
   <a-locale-provider :locale="zhCN">
     <div class="container">
+      <div class="darkmode-background" />
+      <div class="darkmode-layer" />
       <div class="navbar">
         <div class="navbar-header">
           <a class="navbar-brand" href="/">
@@ -41,6 +43,14 @@
                 <font-awesome-icon :icon="['fas', 'user']" />关于
               </nuxt-link>
               <div class="nav-line" />
+            </li>
+            <li class="dark-tools">
+              <a class="dark-mode-btn" title="深色模式" @click="toggleMode">
+                <web-font icon="moon" />
+              </a>
+              <a class="light-mode-btn" title="浅色模式" @click="toggleMode">
+                <web-font icon="sun" />
+              </a>
             </li>
           </ul>
         </div>
@@ -102,7 +112,32 @@ export default Vue.extend({
     },
     toTop () {
       window.scrollTo(0, 0);
+    },
+    toggleMode () {
+      const container = document.body;
+      if (container.classList.contains('dark-mode')) {
+        container.classList.remove('dark-expaned');
+        setTimeout(() => {
+          container.classList.remove('dark-notransition');
+          container.classList.remove('dark-mode');
+          container.classList.add('light-mode');
+        }, 10);
+        localStorage.removeItem('dark-mode');
+      } else {
+        container.classList.remove('light-mode');
+        container.classList.add('dark-mode');
+        setTimeout(() => {
+          container.classList.add('dark-notransition');
+          container.classList.add('dark-expaned');
+        }, 300);
+        localStorage.setItem('dark-mode', '1');
+      }
     }
+  },
+  head: {
+    script: [{
+      src: '/darkmode.js'
+    }]
   }
 });
 </script>
@@ -291,6 +326,93 @@ export default Vue.extend({
   color: #fff;
 }
 
+.navbar-collapse .dark-tools {
+  user-select: none;
+}
+
+.navbar-collapse .dark-tools svg {
+  height: 22px;
+  width: 22px;
+  position: relative;
+  top: 6px;
+  color: #efbb35;
+}
+
+.darkmode-background {
+  background: #f3f3f4;
+  position: fixed;
+  pointer-events: none;
+  z-index: -10;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+/* .darkmode-layer {
+  position: fixed;
+  pointer-events: none;
+  background: #fff;
+  transition: all 0.3s ease;
+  mix-blend-mode: difference;
+  width: 22px;
+  height: 22px;
+  top: 24px;
+  right: 17px;
+  border-radius: 50%;
+  transform: scale(1);
+  z-index: 99999;
+}
+
+.dark-mode .darkmode-layer {
+  width: 22px;
+  height: 22px;
+  transform: scale(100);
+} */
+
+.darkmode-layer {
+  /* display: none; */
+  position: fixed;
+  pointer-events: none;
+  background: #fff;
+  mix-blend-mode: difference;
+  width: 22px;
+  height: 22px;
+  top: 24px;
+  right: 17px;
+  border-radius: 50%;
+  transform: scale(0);
+  transition: all .3s ease;
+  z-index: 99999;
+}
+
+.dark-mode .darkmode-layer {
+  transform: scale(200);
+  border-radius: 0;
+}
+
+.dark-mode.dark-expaned .darkmode-layer {
+  transform: scale(1);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+}
+
+.dark-mode.dark-notransition .darkmode-layer {
+  transition: none;
+}
+
+.light-mode .dark-mode-btn,
+.dark-mode .light-mode-btn {
+  display: block;
+}
+
+.light-mode .light-mode-btn,
+.dark-mode .dark-mode-btn {
+  display: none;
+}
+
 @media (max-width: 576px) {
   .navbar-toggler {
     display: block;
@@ -349,5 +471,22 @@ export default Vue.extend({
   top: 50%;
   left: 50%;
   margin: -10px;
+}
+
+.dark-mode .container img,
+.dark-mode .container .item-footer1 a:hover,
+.dark-mode .container .item-footer2 a:hover,
+.dark-mode .container .navbar-collapse .dark-tools,
+.dark-mode .container .avatar svg,
+.dark-mode .container .comment-item-avatar,
+.dark-mode .container .profile-wrap,
+.dark-mode .container .article-content .pre-header-left div,
+.dark-mode .container pre.info,
+.dark-mode .container pre.alert,
+.dark-mode .ant-drawer img,
+.dark-mode .ant-drawer .pre-header-left div,
+.dark-mode .ant-drawer pre.info,
+.dark-mode .ant-drawer pre.alert {
+  mix-blend-mode: difference;
 }
 </style>

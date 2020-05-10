@@ -7,9 +7,8 @@
           <h3>{{ profile.enName }}</h3>
           <h4>{{ profile.cnName }}</h4>
         </div>
-        <div class="body">
-          {{ profile.introduction }}
-        </div>
+        <!-- eslint-disable-next-line vue/no-v-html -->
+        <div class="body" v-html="profile.introduction" />
         <div v-if="profile.github || profile.email" class="footer">
           <a v-if="profile.github" :href="profile.github" title="GitHub" target="_blank"><font-awesome-icon :icon="['fab', 'github']" /> {{ profile.github }}</a>
           <span v-if="profile.email" title="Email"><font-awesome-icon :icon="['far', 'envelope']" /> {{ profile.email }}</span>
@@ -25,6 +24,7 @@
 </template>
 <script lang="ts">
 import Vue from 'vue';
+import MarkdownIt from 'markdown-it';
 import { IProfile, ISetting } from '@/types/schema';
 import { Context } from '@nuxt/types/index';
 export default Vue.extend({
@@ -32,8 +32,14 @@ export default Vue.extend({
   async asyncData ({ $axios, error }: Context) {
     const { code, data } = await $axios.$get('/api/profile');
     if (code === 1) {
+      const profile = data.profile;
+      const md = new MarkdownIt({
+        html: true,
+        breaks: false
+      });
+      profile.introduction = md.render(profile.introduction);
       return {
-        profile: data.profile
+        profile
       };
     } else {
       error({
@@ -67,7 +73,7 @@ export default Vue.extend({
 }
 
 .profile-wrap {
-  background-image: linear-gradient(90deg,#00BCD4 0,#1890ff 100%);
+  background-image: linear-gradient(-90deg,#00BCD4 0,#1890ff 100%);
   border-radius: 10px;
   max-width: 680px;
   margin: 0 auto;
